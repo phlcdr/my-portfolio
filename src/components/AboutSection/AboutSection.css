@@ -35,7 +35,7 @@
 .about-grid-it {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr 1fr;
-  gap: 4rem;
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: flex-start;
 }
 

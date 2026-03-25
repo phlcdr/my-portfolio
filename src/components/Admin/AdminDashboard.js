@@ -284,8 +284,9 @@ const AdminDashboard = () => {
           {/* Project Management */}
           <section className="editor-section">
             <h3>Project Archive Management</h3>
-            <form onSubmit={handleAddProject} className="studio-field-group" style={{ padding: '2rem', border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)', gap: '1.5rem' }}>
+            <form onSubmit={handleAddProject} className="studio-form-project">
               <div className="studio-field-group">
+
                 <label>PROJECT_TITLE</label>
                 <input type="text" className="studio-input" value={newProject.title} onChange={e => setNewProject({...newProject, title: e.target.value})} required placeholder="e.g. Enterprise CRM" />
               </div>
@@ -293,92 +294,97 @@ const AdminDashboard = () => {
                 <label>DATA_DESCRIPTION</label>
                 <textarea className="studio-textarea" style={{minHeight: '80px'}} value={newProject.description} onChange={e => setNewProject({...newProject, description: e.target.value})} required placeholder="System description..." />
               </div>
-              <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <div className="studio-field-group">
-                  <label>TECH_STACK_TAGS</label>
-                  <input type="text" className="studio-input" value={newProject.tags} onChange={e => setNewProject({...newProject, tags: e.target.value})} required placeholder="React, Node, etc." />
+                <div className="studio-form-grid">
+                  <div className="studio-field-group">
+                    <label>TECH_STACK_TAGS</label>
+                    <input type="text" className="studio-input" value={newProject.tags} onChange={e => setNewProject({...newProject, tags: e.target.value})} required placeholder="React, Node, etc." />
+                  </div>
+                  <div className="studio-field-group">
+                    <label>CATEGORY_NODE</label>
+                    <select className="studio-input" value={newProject.category} onChange={e => setNewProject({...newProject, category: e.target.value})}>
+                      <option value="Frontend">Frontend</option>
+                      <option value="Backend">Backend</option>
+                      <option value="Full-Stack">Full-Stack</option>
+                    </select>
+                  </div>
                 </div>
+                <button type="submit" className="studio-save-btn" style={{ marginTop: '1rem', width: '100%' }}>INITIALIZE_NEW_PROJECT</button>
+              </form>
+  
+              <div className="data-table-container">
+                <div className="data-table-wrapper">
+                  <table className="studio-table">
+                    <thead>
+                      <tr>
+                        <th>TITLE</th>
+                        <th>CATEGORY</th>
+                        <th style={{ textAlign: 'right' }}>ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.projects.map(proj => (
+                        <tr key={proj.id}>
+                          <td className="table-title">{proj.title}</td>
+                          <td>{proj.category}</td>
+                          <td style={{ textAlign: 'right' }}>
+                            <button onClick={() => handleDeleteProject(proj.id)} className="table-purge-btn">PURGE</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+  
+            {/* Skill Management */}
+            <section className="editor-section">
+              <h3>Skill Node Management</h3>
+              <form onSubmit={handleAddSkill} className="studio-form-skill-grid">
                 <div className="studio-field-group">
                   <label>CATEGORY_NODE</label>
-                  <select className="studio-input" value={newProject.category} onChange={e => setNewProject({...newProject, category: e.target.value})}>
+                  <select className="studio-input" value={newSkill.category_name} onChange={e => setNewSkill({...newSkill, category_name: e.target.value})}>
                     <option value="Frontend">Frontend</option>
                     <option value="Backend">Backend</option>
-                    <option value="Full-Stack">Full-Stack</option>
+                    <option value="Database">Database</option>
+                    <option value="Tools">Tools</option>
                   </select>
                 </div>
-              </div>
-              <button type="submit" className="studio-save-btn" style={{ marginTop: '1rem', width: '100%' }}>INITIALIZE_NEW_PROJECT</button>
-            </form>
-
-            <div className="data-table-container" style={{ marginTop: '2rem' }}>
-              <table className="studio-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <th style={{ padding: '1rem 0' }}>TITLE</th>
-                    <th style={{ padding: '1rem 0' }}>CATEGORY</th>
-                    <th style={{ padding: '1rem 0', textAlign: 'right' }}>ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.projects.map(proj => (
-                    <tr key={proj.id} style={{ borderBottom: '1px dashed rgba(255,255,255,0.05)' }}>
-                      <td style={{ padding: '1rem 0', fontFamily: 'var(--font-mono)', color: 'var(--accent-it)' }}>{proj.title}</td>
-                      <td style={{ padding: '1rem 0' }}>{proj.category}</td>
-                      <td style={{ padding: '1rem 0', textAlign: 'right' }}>
-                        <button onClick={() => handleDeleteProject(proj.id)} style={{ background: 'transparent', color: '#ff4d4d', border: '1px solid #ff4d4d', padding: '0.3rem 0.8rem', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.6rem' }}>PURGE</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* Skill Management */}
-          <section className="editor-section">
-            <h3>Skill Node Management</h3>
-            <form onSubmit={handleAddSkill} className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '1rem', alignItems: 'end', padding: '2rem', border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-              <div className="studio-field-group">
-                <label>CATEGORY_NODE</label>
-                <select className="studio-input" value={newSkill.category_name} onChange={e => setNewSkill({...newSkill, category_name: e.target.value})}>
-                  <option value="Frontend">Frontend</option>
-                  <option value="Backend">Backend</option>
-                  <option value="Database">Database</option>
-                  <option value="Tools">Tools</option>
-                </select>
-              </div>
-              <div className="studio-field-group">
-                <label>SKILL_IDENTIFIER</label>
-                <input type="text" className="studio-input" value={newSkill.skill_name} onChange={e => setNewSkill({...newSkill, skill_name: e.target.value})} required placeholder="e.g. React.js" />
-              </div>
-              <button type="submit" className="studio-save-btn" style={{ margin: 0, padding: '1.2rem' }}>ADD_NODE</button>
-            </form>
-
-            <div className="data-table-container" style={{ marginTop: '2rem' }}>
-              <table className="studio-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <th style={{ padding: '1rem 0' }}>SKILL_NODE</th>
-                    <th style={{ padding: '1rem 0' }}>CATEGORY</th>
-                    <th style={{ padding: '1rem 0', textAlign: 'right' }}>ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.skills.map(category => (
-                    category.skills.map(skill => (
-                      <tr key={skill.id} style={{ borderBottom: '1px dashed rgba(255,255,255,0.05)' }}>
-                        <td style={{ padding: '1rem 0', fontFamily: 'var(--font-mono)', color: 'var(--accent-it)' }}>{skill.name}</td>
-                        <td style={{ padding: '1rem 0' }}>{category.name}</td>
-                        <td style={{ padding: '1rem 0', textAlign: 'right' }}>
-                          <button onClick={() => handleDeleteSkill(skill.id)} style={{ background: 'transparent', color: '#ff4d4d', border: '1px solid #ff4d4d', padding: '0.3rem 0.8rem', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.6rem' }}>PURGE</button>
-                        </td>
+                <div className="studio-field-group">
+                  <label>SKILL_IDENTIFIER</label>
+                  <input type="text" className="studio-input" value={newSkill.skill_name} onChange={e => setNewSkill({...newSkill, skill_name: e.target.value})} required placeholder="e.g. React.js" />
+                </div>
+                <button type="submit" className="studio-save-btn">ADD_NODE</button>
+              </form>
+  
+              <div className="data-table-container">
+                <div className="data-table-wrapper">
+                  <table className="studio-table">
+                    <thead>
+                      <tr>
+                        <th>SKILL_NODE</th>
+                        <th>CATEGORY</th>
+                        <th style={{ textAlign: 'right' }}>ACTION</th>
                       </tr>
-                    ))
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+                    </thead>
+                    <tbody>
+                      {data.skills.map(category => (
+                        category.skills.map(skill => (
+                          <tr key={skill.id}>
+                            <td className="table-title">{skill.name}</td>
+                            <td>{category.name}</td>
+                            <td style={{ textAlign: 'right' }}>
+                              <button onClick={() => handleDeleteSkill(skill.id)} className="table-purge-btn">PURGE</button>
+                            </td>
+                          </tr>
+                        ))
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
 
           <footer style={{ marginTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem' }}>
             <div className="preview-status" style={{ color: 'rgba(255,255,255,0.2)' }}>

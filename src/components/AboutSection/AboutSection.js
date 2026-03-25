@@ -17,7 +17,7 @@ const AboutSection = ({ data }) => {
           <span className="tech-coord-v">02</span>
           <span className="tech-label-minimal">/ PROFILE_OVERVIEW</span>
         </div>
-        
+
         <div className="about-header-it">
           <h2 className="section-title">Identity</h2>
           <div className="tech-divider"></div>
@@ -32,10 +32,10 @@ const AboutSection = ({ data }) => {
         >
           <div className="about-visual-column">
             <div className="profile-image-container-it">
-              <img 
-                src={profilePicture || "/default-profile.jpg"} 
-                alt="Profile" 
-                className="profile-image-it" 
+              <img
+                src={profilePicture || "/default-profile.jpg"}
+                alt="Profile"
+                className="profile-image-it"
               />
               <div className="image-overlay-it" />
             </div>
@@ -46,7 +46,7 @@ const AboutSection = ({ data }) => {
               ENGINEERING DIGITAL SOLUTIONS WITH <span className="tech-accent-text">PRECISION_&_PURPOSE</span>.
             </h3>
             <p className="about-bio-it">{aboutBio}</p>
-            
+
             <div className="about-actions-it">
               <a href={resumeUrl} className="luxury-button" target="_blank" rel="noopener noreferrer">
                 DOWNLOAD_RESUME
@@ -61,7 +61,7 @@ const AboutSection = ({ data }) => {
             </div>
             <div className="spec-item-it">
               <span className="spec-label-it">[ TECH_STACK ]</span>
-              <span className="spec-value-it">MERN / FULL-STACK</span>
+              <span className="spec-value-it">FULL-STACK</span>
             </div>
             <div className="spec-item-it">
               <span className="spec-label-it">[ ARCHITECTURE ]</span>
