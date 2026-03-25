@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 import AdminPage from "./pages/AdminPage";
-import { applySecurityHardening, getCSRFToken } from "./utils/security";
+import { getCSRFToken } from "./utils/security";
 
 // Lazy load public frontend page
 const HomePage = lazy(() => import("./pages/HomePage"));

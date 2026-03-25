@@ -33,7 +33,6 @@ const FloatingNav = ({ data }) => {
     setMobileOpen(false);
   };
 
-  const authorName = data?.content?.heroTitle || "P. J. CIDRO";
 
   return (
     <>

@@ -3,7 +3,6 @@ import React from "react";
 import "./FooterSection.css";
 
 const FooterSection = ({ data }) => {
-  const authorName = data?.heroTitle || "PHILIP JOHN CIDRO";
   const year = new Date().getFullYear();
 
   const handleScroll = (id) => {

@@ -4,37 +4,6 @@ import { useInView } from "react-intersection-observer";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import "./SkillsSection.css";
 
-const SkillLine = ({ skill, delay }) => {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
-
-  return (
-    <div ref={ref} className="skill-item">
-      <div className="skill-header">
-        <span className="skill-name">{skill.name}</span>
-        <motion.span
-          className="skill-pct"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: delay + 0.4 }}
-        >
-          {skill.level}%
-        </motion.span>
-      </div>
-      <div className="skill-track">
-        <motion.div
-          className="skill-fill"
-          initial={{ width: "0%" }}
-          animate={inView ? { width: `${skill.level}%` } : {}}
-          transition={{
-            duration: 1.2,
-            delay: delay + 0.1,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        />
-      </div>
-    </div>
-  );
-};
 
 const SkillsSection = ({ data }) => {
   const categories = data || [];

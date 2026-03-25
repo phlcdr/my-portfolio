@@ -12,7 +12,7 @@ const ProjectCard = ({ project, index }) => (
     transition={{ duration: 1, delay: index * 0.1 }}
   >
     <div className="project-header-it">
-      <span className="project-id-it">PRJ_{(index + 1).toString().padStart(2, '0')} // ARCHIVE</span>
+      <span className="project-id-it">PRJ_{(index + 1).toString().padStart(2, '0')} / ARCHIVE</span>
       <span className="tech-node-p" />
     </div>
 
@@ -51,7 +51,7 @@ const ProjectsSection = ({ data }) => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const projects = data || [];
+
   
   const categories = useMemo(() => {
     const projectsList = data || [];
