@@ -62,11 +62,19 @@ app.use((err, req, res, next) => {
 });
 
 // Initialize DB and Start Server
-initDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+if (process.env.NODE_ENV !== 'production') {
+  initDb().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }).catch(err => {
+    console.error('Failed to initialize database:', err);
+    process.exit(1);
   });
-}).catch(err => {
-  console.error('Failed to initialize database:', err);
-  process.exit(1);
-});
+} else {
+  // For Vercel/Production
+  initDb();
+}
+
+module.exports = app;
+
