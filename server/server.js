@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
@@ -26,6 +27,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Middleware
+app.use(helmet({
+  contentSecurityPolicy: false, // Disabled for local development or if controlled elsewhere
+  crossOriginResourcePolicy: false // Allow loading images from other origins if needed
+}));
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

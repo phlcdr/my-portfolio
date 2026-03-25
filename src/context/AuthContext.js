@@ -41,6 +41,41 @@ export const AuthProvider = ({ children }) => {
     };
   }, [token]);
 
+  // Inactivity Auto-Logout (10 Minutes)
+  useEffect(() => {
+    let timeoutId;
+
+    const resetTimer = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (user) {
+        timeoutId = setTimeout(() => {
+          console.log("INACTIVITY_TIMEOUT // SESSION_TERMINATED");
+          logout();
+        }, 10 * 60 * 1000); // 10 minutes
+      }
+    };
+
+    if (user) {
+      // Activity listeners
+      window.addEventListener('mousemove', resetTimer);
+      window.addEventListener('mousedown', resetTimer);
+      window.addEventListener('keypress', resetTimer);
+      window.addEventListener('scroll', resetTimer);
+      window.addEventListener('touchstart', resetTimer);
+
+      resetTimer(); // Start timer on mount/login
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      window.removeEventListener('mousemove', resetTimer);
+      window.removeEventListener('mousedown', resetTimer);
+      window.removeEventListener('keypress', resetTimer);
+      window.removeEventListener('scroll', resetTimer);
+      window.removeEventListener('touchstart', resetTimer);
+    };
+  }, [user]);
+
   const login = async (username, password) => {
     try {
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';

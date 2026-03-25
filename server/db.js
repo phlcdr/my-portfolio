@@ -66,7 +66,7 @@ const initDb = () => {
           const initialContent = [
             ['heroTitle', 'Philip John Cidro'],
             ['heroBio', 'I craft digital experiences that merge clean architecture with stunning design. Passionate about building scalable, secure, and high-performance web applications.'],
-            ['heroTaglines', JSON.stringify(["Full-Stack Developer", "UI/UX Enthusiast", "React Specialist", "Problem Solver"])],
+            ['heroTaglines', JSON.stringify(["Full-Stack Developer", "Problem Solving", "Collaboration"])],
             ['location', 'Philippines'],
             ['available', 'true'],
             ['resumeUrl', '#'],

@@ -76,12 +76,11 @@
   object-fit: cover;
   margin: 0 auto 1.5rem;
   border: 1px solid var(--border-tech);
-  filter: grayscale(100%);
-  transition: filter 0.3s;
+  transition: transform 0.3s;
 }
 
 .profile-preview-card:hover .preview-image-it {
-  filter: grayscale(0%);
+  transform: scale(1.05);
 }
 
 .preview-name {
@@ -135,14 +134,20 @@
 
 .studio-input, 
 .studio-textarea {
-  background: transparent;
+  background: #0a0a0a;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 0;
+  padding: 1rem 0.5rem;
   color: #fff;
   font-size: 1.1rem;
   font-family: inherit;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
+}
+
+.studio-input option {
+  background: #111;
+  color: #fff;
+  padding: 1rem;
 }
 
 .studio-textarea {
