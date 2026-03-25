@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import "./index.css";
+import AdminPage from "./pages/AdminPage";
+import { applySecurityHardening, getCSRFToken } from "./utils/security";
+
+// Lazy load public frontend page
+const HomePage = lazy(() => import("./pages/HomePage"));
 
 function App() {
+  useEffect(() => {
+    // Initialize CSRF token on app load
+    getCSRFToken();
+    // Temporarily disabled to allow DevTools inspection for troubleshooting
+    // applySecurityHardening();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        {/* Inject Google Fonts for the new Luxury Aesthetic */}
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        
+        <Routes>
+          <Route path="/admin" element={<AdminPage />} />
+          <Route 
+            path="/*" 
+            element={
+              <Suspense fallback={<div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#fdfdfd" }}>Loading...</div>}>
+                <HomePage />
+              </Suspense>
+            } 
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

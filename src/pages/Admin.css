@@ -1,0 +1,23 @@
+/* Admin Portal Base Styles */
+
+.admin-page {
+  min-height: 100vh;
+  /* Removed the background: var(--bg-primary) so it doesn't conflict with child components */
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  color: var(--accent-it, #00e5ff);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: #050505;
+}
+
+/* ALL LEGACY ADMIN LOGIN AND CMS TABLE STYLES REMOVED TO PREVENT CONFLICTS */
